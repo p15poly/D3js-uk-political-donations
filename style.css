@@ -152,13 +152,13 @@ circle.active {
     margin: 0.2em;
 }
 .lab {
-    fill: #F02233;
+    fill: ##0000FF;
 }
 .lib {
-    fill: #FDBB30;
+    fill: #F5B10F;
 }
 .con {
-    fill: #087FBD;
+    fill: ##D209F6;
 }
 .snp {
     fill: #C9C945;
@@ -201,7 +201,7 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     padding: 0.5em 1.5em 0.5em;
     color: #444;
     /* rgba not supported (IE 8) */
-    color: rgba(54, 144, 0, 0.80);
+    color: rgba(0, 0, 0, 0.80);
     /* rgba supported */
     *color: #444;
     /* IE 6 & 7 */
@@ -235,4 +235,3 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 .pure-button-active, .pure-button:active {
     color: rgb(0, 120, 231);
     color: #fff
-}
