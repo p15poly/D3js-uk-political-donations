@@ -201,7 +201,7 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     padding: 0.5em 1.5em 0.5em;
     color: #444;
     /* rgba not supported (IE 8) */
-    color: rgba(0, 0, 0, 0.80);
+    color: rgba(54, 144, 0, 0.80);
     /* rgba supported */
     *color: #444;
     /* IE 6 & 7 */
