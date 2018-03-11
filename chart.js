@@ -96,6 +96,8 @@ function start() {
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
+	        .on("click", googleSearch);
+	     
 
 		force.gravity(0)
 			.friction(0.75)
@@ -364,8 +366,12 @@ $(document).ready(function() {
       return transition(id);
     });
     return d3.csv("data/7500up.csv", display);
-    return window.open('https://google.com.search?q=', d3.csv)
-
+    
 });
+// Creating a function that opens a new window with the results of a google search for each donor
+function googleSearch(d) {
+  var donor = d.donor;
+window.open("https://www.google.com/search?q=" + donor);
+}
 
 
