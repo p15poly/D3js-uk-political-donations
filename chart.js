@@ -369,9 +369,5 @@ $(document).ready(function() {
     
 });
 // Creating a function that opens a new window with the results of a google search for each donor
-function googleSearch(d) {
-  var donor = d.donor;
-window.open("https://www.google.com/search?q=" + donor);
-}
 
 
