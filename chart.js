@@ -21,7 +21,8 @@ var entityCentres = {
 		individual: {x: w / 3.65, y: h / 3.3},
 	};
 
-var fill = d3.scale.ordinal().range(["#58C0B6", "#FE9814", "#FF57D2"]);
+//Change the colour of the balls
+var fill = d3.scale.ordinal().range(["#308E15", "#9B8EBD", "#875A29"]); 
 
 var svgCentre = { 
     x: w / 3.6, y: h / 2
@@ -48,6 +49,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
+		$("#view-donation-amount").fadeOut(250);
 		return total();
 		//location.reload();
 	}
@@ -57,6 +59,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
+		$("#view-donation-amount").fadeOut(250);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
@@ -65,15 +68,28 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
+		$("#view-donation-amount").fadeOut(250);
 		return donorType();
 	}
-	if (name === "group-by-money-source")
+	if (name === "group-by-money-source") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
+		$("#view-donation-amount").fadeOut(250);
 		return fundsType();
+	}
+	//New transition
+	if (name === "group-by-donation-amount") {
+		$("#initial-content").fadeOut(250);
+		$("#value-scale").fadeOut(250);
+		$("#view-donor-type").fadeOut(250);
+		$("#view-party-type").fadeOut(250);
+		$("#view-source-type").fadeOut(250);
+		$("#view-donation-amount").fadeIn(1000);
+		return amountsGroup();
+	}
 	}
 
 function start() {
@@ -92,13 +108,12 @@ function start() {
 		.attr("r", 0)
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
-		.on("mouseout", mouseout);
+		.on("mouseout", mouseout)	//;
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
-	        .on("click", googleSearch);
-	     
-
+		.on("click", googleSearch);	//activate google search
+	
 		force.gravity(0)
 			.friction(0.75)
 			.charge(function(d) { return -Math.pow(d.radius, 2) / 3; })
@@ -143,6 +158,15 @@ function fundsType() {
 		.on("tick", types)
 		.start();
 }
+//New function
+function amountsGroup() {
+	force.gravity(0)
+		.friction(0.8)
+		.charge(function(d) { return -Math.pow(d.radius, 2.0) / 3; })
+		.on("tick", amounts)
+		.start()
+		.colourByParty();
+}
 
 function parties(e) {
 	node.each(moveToParties(e.alpha));
@@ -173,7 +197,14 @@ function all(e) {
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
 }
+//New function
+function amounts(e) {
+	node.each(moveToAmounts(e.alpha))
+		//.each(collide(0.001));
 
+		node.attr("cx", function(d) { return d.x; })
+			.attr("cy", function(d) {return d.y; });
+}
 
 function moveToCentre(alpha) {
 	return function(d) {
@@ -242,7 +273,30 @@ function moveToFunds(alpha) {
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
 	};
 }
-
+//New function+++
+function moveToAmounts(alpha) {
+	return function(d) {
+		var centreY = svgCentre.y;
+		if (d.value <= 25001) {
+				centreX = svgCentre.x + 600;	//500
+			} else if (d.value <= 50001) {
+				centreX = svgCentre.x + 500;	//400
+			} else if (d.value <= 100001) {
+				centreX = svgCentre.x + 400;	//300
+			} else  if (d.value <= 500001) {
+				centreX = svgCentre.x + 300;	//200
+			} else  if (d.value <= 1000001) {
+				centreX = svgCentre.x + 200;	//100
+			} else  if (d.value <= maxVal) {
+				centreX = svgCentre.x ;
+			} else {
+				centreX = svgCentre.x; // εάν το ποσό υπερβαίνει το maxVal πάλι θα μπει μαζί με τα μεγαλύτερα
+			}
+		
+		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 2.2;	//d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
+		d.y += (centreY - d.y) * (brake + 0.06) * alpha * 2.2;	//d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+	};
+}
 // Collision detection function by m bostock
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(nodes);
@@ -317,8 +371,7 @@ function mouseover(d, i) {
 	var party = d.partyLabel;
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
-	
-
+	this.style.cursor="pointer";	//change the style of cursor to pointer
 
 	// image url that want to check
 	var imageFile = "https://raw.githubusercontent.com/ioniodi/D3js-uk-political-donations/master/photos/" + donor + ".ico";
@@ -347,17 +400,21 @@ function mouseover(d, i) {
 		.html(infoBox)
 			.style("display","block");
 	
-	
+	responsiveVoice.speak("Donor:     " + donor + "Amount of donation:     " + "  £" + amount);	//add voice
 	}
 
 function mouseout() {
 	// no more tooltips
 		var mosie = d3.select(this);
-
+		
+		this.style.cursor="default";	//default style of cursor
+	
 		mosie.classed("active", false);
 
 		d3.select(".tooltip")
 			.style("display", "none");
+	
+	responsiveVoice.cancel();	//remove voice
 		}
 
 $(document).ready(function() {
@@ -366,12 +423,11 @@ $(document).ready(function() {
       return transition(id);
     });
     return d3.csv("data/7500up.csv", display);
-    
+
 });
-// Creating a function that opens a new window with the results of a google search for each donor
+
+/* Function which opens google search results for each donor */
 function googleSearch(d) {
   var donor = d.donor;
-window.open("https://www.google.com/search?q=" + donor);
+  window.open("https://www.google.com/search?q=" + donor);
 }
-
-
