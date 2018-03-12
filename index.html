@@ -38,12 +38,12 @@
         <h1>Who's founding the big three?</h1>
     </header>
     
-    <!-- Add sound for navigation buttons -->
+    <!-- Add sound for the navigation buttons -->
     <script>		
-        var sound = new Audio("sound.mp3");
+        var sound = new Audio("sound.mp3"); 
     </script>
     
-    <nav role="navigation">
+    <nav role="navigation"> //I added the ( onclick="sound.play()" ) command for each button and also for the new group:group by donation amount
         <ul>
             <li><a href="#" onclick="sound.play()" role="button" class="pure-button switch" id="all-donations">All money</a>
             </li>
@@ -53,7 +53,7 @@
             </li>
             <li><a href="#" onclick="sound.play()" role="button" class="pure-button switch" id="group-by-donor-type">Split by type of donor</a>
             </li>
-            <li><a href="#" onclick="sound.play()" role="button" class="pure-button switch" id="group-by-donation-amount">Split by the amount of the donation</a>
+            <li><a href="#" onclick="sound.play()" role="button" class="pure-button switch" id="group-by-donation-amount">Split by the amount of the donation</a> // the new group
             </li>
         </ul>
     </nav>
