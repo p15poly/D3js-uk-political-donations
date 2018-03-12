@@ -371,6 +371,8 @@ function mouseover(d, i) {
 	var party = d.partyLabel;
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
+	responsiveVoice.speak("Donor " +donor + "Amount of donation: "+"  £" + amount);
+
 	
 
 	// image url that want to check
