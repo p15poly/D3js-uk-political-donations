@@ -80,7 +80,7 @@ function transition(name) {
 		$("#view-donation-amount").fadeOut(250);
 		return fundsType();
 	}
-	//New transition
+	
 	if (name === "group-by-donation-amount") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
@@ -158,7 +158,6 @@ function fundsType() {
 		.on("tick", types)
 		.start();
 }
-//New function
 function amountsGroup() {
 	force.gravity(0)
 		.friction(0.8)
@@ -197,7 +196,7 @@ function all(e) {
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
 }
-//New function
+
 function amounts(e) {
 	node.each(moveToAmounts(e.alpha))
 		//.each(collide(0.001));
@@ -273,28 +272,28 @@ function moveToFunds(alpha) {
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
 	};
 }
-//the new function
+
 function moveToAmounts(alpha) {
 	return function(d) {
 		var centreY = svgCentre.y;
 		if (d.value <= 25001) {
-				centreX = svgCentre.x + 600;	//500
-			} else if (d.value <= 50001) {
-				centreX = svgCentre.x + 500;	//400
+				centreX = svgCentre.x + 600;	
+		        } else if (d.value <= 50001) {
+				centreX = svgCentre.x + 500;	
 			} else if (d.value <= 100001) {
-				centreX = svgCentre.x + 400;	//300
+				centreX = svgCentre.x + 400;	
 			} else  if (d.value <= 500001) {
-				centreX = svgCentre.x + 300;	//200
+				centreX = svgCentre.x + 300;	
 			} else  if (d.value <= 1000001) {
-				centreX = svgCentre.x + 200;	//100
+				centreX = svgCentre.x + 200;	
 			} else  if (d.value <= maxVal) {
 				centreX = svgCentre.x ;
 			} else {
 				centreX = svgCentre.x; 
 			}
 		
-		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 2.2;	//d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
-		d.y += (centreY - d.y) * (brake + 0.06) * alpha * 2.2;	//d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 2.2;	
+		d.y += (centreY - d.y) * (brake + 0.06) * alpha * 2.2;	
 	};
 }
 // Collision detection function by m bostock
