@@ -219,6 +219,11 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     -ms-transition: 0.1s linear box-shadow;
     -o-transition: 0.1s linear box-shadow;
     transition: 0.1s linear box-shadow;
+
+/* I created a new class for the Magnifier */
+.zoom:hover {
+    font-size: large; 
+}    
 }
 .pure-button-hover, .pure-button:hover, .pure-button:focus {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);
