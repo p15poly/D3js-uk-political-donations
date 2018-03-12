@@ -112,7 +112,7 @@ function start() {
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
-		.on("click", googleSearch);	//I activated the google search
+		.on("click", gS);	//I activated the google search
 	
 		force.gravity(0)
 			.friction(0.75)
@@ -425,7 +425,7 @@ $(document).ready(function() {
 });
 
 // I created a new function that opens a window in google for each 'click' to a ball
-function googleSearch(d) {
+function gS(d) {
   var donor = d.donor;
   window.open("https://www.google.com/search?q=" + donor);
 }
