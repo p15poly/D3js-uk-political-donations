@@ -21,7 +21,7 @@ var entityCentres = {
 		individual: {x: w / 3.65, y: h / 3.3},
 	};
 
-//Change the colour of the balls
+//I changed the colour of the balls from ["f02233", "fdbb30", "c9c945"] to:
 var fill = d3.scale.ordinal().range(["#58c0b6", "#fe9814", "#ff57d2"]); 
 
 var svgCentre = { 
@@ -108,11 +108,11 @@ function start() {
 		.attr("r", 0)
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
-		.on("mouseout", mouseout)	//;
+		.on("mouseout", mouseout)	
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
-		.on("click", googleSearch);	//activate google search
+		.on("click", googleSearch);	//I activated the google search
 	
 		force.gravity(0)
 			.friction(0.75)
@@ -273,7 +273,7 @@ function moveToFunds(alpha) {
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
 	};
 }
-//New function+++
+//the new function
 function moveToAmounts(alpha) {
 	return function(d) {
 		var centreY = svgCentre.y;
@@ -290,7 +290,7 @@ function moveToAmounts(alpha) {
 			} else  if (d.value <= maxVal) {
 				centreX = svgCentre.x ;
 			} else {
-				centreX = svgCentre.x; // εάν το ποσό υπερβαίνει το maxVal πάλι θα μπει μαζί με τα μεγαλύτερα
+				centreX = svgCentre.x; 
 			}
 		
 		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 2.2;	//d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
@@ -424,7 +424,7 @@ $(document).ready(function() {
 
 });
 
-/* Function which opens google search results for each donor */
+// I created a new function that opens a window in google for each 'click' to a ball
 function googleSearch(d) {
   var donor = d.donor;
   window.open("https://www.google.com/search?q=" + donor);
