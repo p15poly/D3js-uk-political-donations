@@ -40,6 +40,19 @@ li {
     width: 272px;
 }
 
+/* Sidebar for images */
+#img-sidebar {
+    position: absolute;
+    left: 1045px;
+    width: 288px;
+    height: 42px;
+    top: 106px;
+}
+
+
+
+
+
 /*  Public or private funds view */
 
 #public-or-private-money {
