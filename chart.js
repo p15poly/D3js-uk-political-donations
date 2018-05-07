@@ -402,6 +402,16 @@ function mouseover(d, i) {
 			.style("display","block");
 	
 	responsiveVoice.speak("Donor:     " + donor + "Amount of donation:     " + "  £" + amount);	//add voice
+	
+	var element = document.createElement("img");	
+	element.src = imageFile;	
+	element.setAttribute("height", "42");	
+	element.setAttribute("width", "42");
+	document.getElementById("images-sidebar").appendChild(element);	
+        dlist.push(donor); 
+	
+	
+	
 	}
 
 function mouseout() {
