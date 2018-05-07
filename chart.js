@@ -393,7 +393,12 @@ function mouseover(d, i) {
 								+ "<p> Type of donor: <b>" + entity + "</b></p>"
 								+ "<p> Total value: <b>&#163;" + comma(amount) + "</b></p>";
 	
-	
+        var element = document.createElement("img");	
+	element.src = imageFile;	
+	element.setAttribute("height", "42");	
+	element.setAttribute("width", "42");
+	document.getElementById("images-sidebar").appendChild(element);	
+        dlist.push(donor); 
 	mosie.classed("active", true);
 	d3.select(".tooltip")
   	.style("left", (parseInt(d3.select(this).attr("cx") - 80) + offset.left) + "px")
@@ -402,16 +407,7 @@ function mouseover(d, i) {
 			.style("display","block");
 	
 	responsiveVoice.speak("Donor:     " + donor + "Amount of donation:     " + "  £" + amount);	//add voice
-	
-	var element = document.createElement("img");	
-	element.src = imageFile;	
-	element.setAttribute("height", "42");	
-	element.setAttribute("width", "42");
-	document.getElementById("images-sidebar").appendChild(element);	
-        dlist.push(donor); 
-	
-	
-	
+		
 	}
 
 function mouseout() {
