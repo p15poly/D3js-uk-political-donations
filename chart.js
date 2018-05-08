@@ -398,9 +398,22 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
-	
+	this.style.cursor="hand";
 	responsiveVoice.speak("Donor:     " + donor + "Amount of donation:     " + "  £" + amount);	//add voice
+	
+	// placing image to sidebar
+	var http = new XMLHttpRequest();
+	http.open('HEAD', imageFile, false);
+	http.send();
+	if (http.status != 404){
 		
+		var elem = document.createElement("img");	
+		elem.src = imageFile;
+		elem.setAttribute("height", "42");
+		elem.setAttribute("width", "42");
+                document.getElementById("sidebar").appendChild(elem);
+			
+		}
 	}
 
 function mouseout() {
