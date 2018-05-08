@@ -382,7 +382,19 @@ function mouseover(d, i) {
 	// *******************************************
 	
 	
-	
+	var http = new XMLHttpRequest();
+        http.open('HEAD', imageFile, false);
+        http.send(); // send http request
+        if (http.status != 404){ // check if the image is found
+            
+            var elem = document.createElement("img");	
+            elem.src = imageFile;
+            elem.setAttribute("height", "42");
+            elem.setAttribute("width", "42");
+            document.getElementById("sidebar").appendChild(elem);
+            	
+    }
+}	
 
 	
 
